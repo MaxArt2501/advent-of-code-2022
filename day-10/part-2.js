@@ -10,14 +10,11 @@ for (const value of instructions) {
   const opCycles = value ? 2 : 1;
   // It could paint 1 or 2 pixels depending on the instruction
   for (let index = 0; index < opCycles; index++) {
-    display[cycle + index] = Math.abs(x - ((cycle + index) % 40)) < 2 ? 1 : 0;
+    display[cycle + index] =
+      Math.abs(x - ((cycle + index) % 40)) < 2 ? "#" : ".";
   }
   cycle += opCycles;
   x += value;
 }
 
-console.log(
-  display
-    .map((lit, index) => `${lit ? "#" : "."}${(index + 1) % 40 ? "" : "\n"}`)
-    .join("")
-);
+console.log(display.join("").replace(/(.{40})/g, "$1\n"));
